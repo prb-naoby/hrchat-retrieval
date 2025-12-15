@@ -1,15 +1,23 @@
-# HRChat Retrieval API
+# HRChat Main
 
-A FastAPI-based hybrid search service combining **BM25 sparse vectors** and **Gemini dense embeddings** with **Qdrant** vector database.
+A FastAPI-based hybrid search service with **OpenWebUI** frontend, combining **BM25 sparse vectors** and **Gemini dense embeddings** with **Qdrant** vector database.
+
+## Services
+
+| Service | Port | Description |
+|---------|------|-------------|
+| `hrchat-retrieval` | 8001 | Hybrid search API |
+| `openwebui` | 3000 | Web UI frontend |
 
 ## Features
 
 - **Hybrid Search**: Combines BM25 sparse vectors + Gemini dense embeddings using RRF fusion
 - **BM25 Endpoints**: Standalone sparse embedding generation for ingestion pipelines
+- **OpenWebUI Frontend**: Modern chat interface
 - **API Authentication**: Optional API key protection for all endpoints
-- **Docker Ready**: Production-ready Dockerfile with GHCR integration
+- **Docker Ready**: Production-ready with GHCR integration
 
-## Endpoints
+## API Endpoints
 
 | Method | Path | Description |
 |--------|------|-------------|
@@ -35,7 +43,8 @@ cp .env.example .env
 docker-compose up -d
 ```
 
-The API will be available at `http://localhost:8001`
+- **API**: `http://localhost:8001`
+- **OpenWebUI**: `http://localhost:3000`
 
 ### 3. Test Health Endpoints
 
@@ -78,15 +87,17 @@ curl -X POST http://localhost:8001/sparse/bm25 \
 
 ## Docker Networks
 
-The service connects to external networks:
+The services connect to external networks:
 - `n8n` - For n8n workflow integration
 - `qdrant` - For Qdrant vector database
+- `nginx-network` - For reverse proxy
 
 Ensure these networks exist before running:
 
 ```bash
 docker network create n8n
 docker network create qdrant
+docker network create nginx-network
 ```
 
 ## Development

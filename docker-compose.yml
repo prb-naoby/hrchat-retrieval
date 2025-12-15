@@ -1,6 +1,6 @@
 services:
   hrchat-retrieval:
-    image: ghcr.io/prb-naoby/hrchat-retrieval:latest
+    image: ghcr.io/prb-naoby/hrchat-main:latest
     container_name: hrchat-retrieval
     restart: unless-stopped
     ports:
