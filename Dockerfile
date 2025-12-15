@@ -15,7 +15,7 @@ COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY src/ ./src
-RUN chown -R appuser:appuser /app
+RUN mkdir -p /app/data && chown -R appuser:appuser /app
 USER appuser
 
 CMD ["uvicorn", "src.api:app", "--host", "0.0.0.0", "--port", "8000"]
