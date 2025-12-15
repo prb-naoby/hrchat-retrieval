@@ -41,6 +41,7 @@ services:
     networks:
       - n8n
       - qdrant
+      - nginx-network
       - default
 
 volumes:
